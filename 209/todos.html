@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Todo List</title>
+  <link rel="stylesheet" type="text/css" href="todos.css">
+</head>
+<body>
+  <input type="checkbox" id="toggle-menu"></input>
+  <nav>
+    <ul>
+      <li tabindex="1"><i class="list-icon" ></i>All Todos<span>18</span></li>
+      <li tabindex="1">02/16<span>8</span></li>
+      <li tabindex="1">03/16<span>2</span></li>
+      <li tabindex="1">04/16<span>1</span></li>
+      <li tabindex="1">05/16<span>1</span></li>
+      <li tabindex="1">06/16<span>6</span></li>
+    </ul>
+
+    <ul>
+      <li tabindex="1"><i class="completed-icon" ></i>Completed</li>
+      <li tabindex="1">02/15</li>
+      <li tabindex="1">03/15</li>
+      <li tabindex="1">04/15</li>
+      <li tabindex="1">05/15</li>
+      <li tabindex="1">06/14</li>
+    </ul>
+  </nav>
+  <main>
+    <div class="wrapper">
+      <header>
+        <label for="toggle-menu" class="menu-icon"></label>
+        <div class="title">02/16<span>8</span></div>
+      </header>
+
+      <section>
+        <a class="add-new">Add new to do</a>
+        
+        <div class="todo-group">
+          <dl>
+            <input type="checkbox" name="items" id="1"></input>
+            <dt><label for="1"></label></dt>
+            <dd>Item 1</dd>
+          </dl>
+          <dl>
+            <input type="checkbox" name="items" id="2"></input>
+            <dt><label for="2"></label></dt>
+            <dd>Item 2</dd>
+          </dl>
+          <dl>
+            <input type="checkbox" name="items" id="3" checked></input>
+            <dt><label for="3"></label></dt>
+            <dd>Item 3</dd>
+          </dl>
+          <dl>
+            <input type="checkbox" name="items" id="4" checked></input>
+            <dt><label for="4"></label></dt>
+            <dd>Item 4</dd>
+          </dl>
+          <dl>
+            <input type="checkbox" name="items" id="5" checked></input>
+            <dt><label for="5"></label></dt>
+            <dd>Item 5</dd>
+          </dl>
+          <dl>
+            <input type="checkbox" name="items" id="6"></input>
+            <dt><label for="6"></label></dt>
+            <dd>Item 6</dd>
+          </dl>
+          <dl>
+            <input type="checkbox" name="items" id="7"></input>
+            <dt><label for="7"></label></dt>
+            <dd>Item 7</dd>
+          </dl>
+          <dl>
+            <input type="checkbox" name="items" id="8"></input>
+            <dt><label for="8"></label></dt>
+            <dd>Item 8</dd>
+          </dl>
+          <dl>
+            <input type="checkbox" name="items" id="9"></input>
+            <dt><label for="9"></label></dt>
+            <dd>Item 9</dd>
+          </dl>
+        </div>
+      </section>
+    </div>
+
+    <div class="">
+      <form>
+        <fieldset>
+
+          <dl>
+            <dt><label for="todo-title">Title</label></dt>
+            <dd><input type="text" id="todo-title" value="Item 2"></input></dd>
+          </dl>
+
+          <fieldset class="date">
+            <dl>
+              <dt><label>Due Date</label></dt>
+              <dd>
+                <select id="year" name="year"> 
+                  <option disabled selected>Year</option>
+                  <option>2016</option>
+                  <option>2017</option>
+                  <option>2018</option>
+                  <option>2019</option>
+                  <option>2020</option>
+                  <option>2021</option>
+                  <option>2022</option>
+                </select>
+              </dd>
+              <dd>/</dd>
+              <dd>
+                <select id="month" name="month">
+                  <option disabled selected>Month</option>
+                  <option>January</option>
+                  <option>February</option>
+                  <option>March</option>
+                  <option>April</option>
+                  <option>May</option>
+                  <option>June</option>
+                  <option>July</option>
+                  <option>August</option>
+                  <option>September</option>
+                  <option>October</option>
+                  <option>November</option>
+                  <option>December</option>
+                </select>
+              </dd>
+              
+              <dd>/</dd>
+              <dd>
+                <select id="day" name="day">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                  <option>8</option>
+                  <option>9</option>
+                  <option>10</option>       
+                  <option>11</option>
+                  <option>12</option>
+                  <option>13</option>
+                  <option>14</option>
+                  <option>15</option>
+                  <option selected>16</option>       
+                  <option>17</option>
+                  <option>18</option>
+                  <option>19</option>
+                  <option>20</option>       
+                  <option>21</option>
+                  <option>22</option>
+                  <option>23</option>
+                  <option>24</option>
+                  <option>25</option>
+                  <option>26</option>
+                  <option>27</option>
+                  <option>28</option>
+                  <option>29</option>
+                  <option>30</option>
+                  <option>31</option>
+                </select>
+              </dd>
+            </dl>
+          </fieldset>
+
+
+          <dl>
+            <dt>
+              <label for="description">Description</label>
+            </dt>
+            <dd>
+              <textarea rows="7" placeholder="Description" id="description"></textarea>
+            </dd>
+          </dl>
+        </fieldset>
+        <dl>
+          <dt></dt>
+          <dd>
+            <input type="submit" value="Save" class="btns"></input>
+            <input type="submit" value="Mark As Complete" class="btns"></input>
+          </dd>
+      </form>
+    </div>
+  </main>
+
+</body>
+
+</html>

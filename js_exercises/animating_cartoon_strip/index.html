@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title></title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="comic.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        var $blinds = $("[id^=blind]"),
+            delay = 250;
+
+        $blinds.each(function(i) {
+          var $blind = $(this),
+              cur_height = "+=" + $blind.height();
+
+          $blind.delay(delay).animate({
+            top: cur_height,
+            height: 0
+          },
+
+          {
+            duration: 250
+          });
+
+          delay = delay + 1500 + 250;
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div id="comic">
+      <div id="panel_1">
+        <div id="blind_1"></div>
+        <div id="blind_2"></div>
+      </div>
+
+      <div id="panel_2">
+        <div id="blind_3"></div>
+        <div id="blind_4"></div>
+      </div>
+
+      <div id="panel_3">
+        <div id="blind_5"></div>
+        <div id="blind_6"></div>
+      </div>
+
+      <div id="panel_4">
+        <div id="blind_7"></div>
+        <div id="blind_8"></div>
+        <div id="blind_9"></div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,50 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font: normal 20px Helvetica, Arial, sans-serif;
+}
+
+body {
+	background-color: yellow;
+	color: #555;
+	/*text-align: center;*/
+}
+
+header, main {
+	margin: 0 auto;
+	width: 58%;
+}
+
+header {
+	color: white;
+	background-color: blue;
+	border-radius: 0 0 15px 15px;
+	height: 105px;
+	padding: 30px;
+	margin-bottom: 40px;
+}
+
+main {
+	background-color: #eee;
+	height: auto;
+	margin-bottom: 20px;
+}
+
+h1 {
+	font-size: 36px;
+	font-weight: bold;
+}
+
+figure {
+	float: left;
+}
+
+figure :nth-of-type(5) {
+	clear: both;
+}
+
+figure img {
+	width: 150px;
+	height: 200px;
+}

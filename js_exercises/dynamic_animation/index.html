@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dynamic Animation</title>
+  <!-- <link rel="stylesheet" type="text/css" href="stylesheets/dynamic_animation.css"> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <!-- <script src="javascripts/dynamic_animation.js"></script> -->
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      /*box-shadow: 0 0 1px rgba(0, 0, 0, 0.8);*/
+    }
+
+    body {
+      background-color: #662222;
+    }
+
+    main {
+      background-color: white;
+      margin: 0 auto;
+      width: 802px;/*
+      height: 100%;*/
+      padding: 20px;
+    }
+
+    #canvas {
+      position: relative;
+      width: 100%;
+      height: 600px;
+      background: linear-gradient(to top, #0066cc, white);
+      margin-bottom: 20px;
+      border: 1px solid rgba(0,66,200, 0.5);
+    }
+
+    h2, h4 {
+      margin: 20px 0;
+    }
+
+    fieldset {
+      border: none;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+    }
+
+    input {
+      margin-right: 10px;
+    }
+
+    input[type="number"] {
+      height: 40px;
+      width: 75px;
+      padding: 5px;
+      margin-top: 10px;
+      border: 1px solid grey;
+      font-size: 18px;
+    }
+
+    input[type="number"]:focus {
+      border: 2px solid #0066cc;
+    }
+
+    input[type="number"]:placeholder-shown {
+      font-size: 18px;
+      color: #333;
+    }
+
+    button {
+      font-size: 1.2em;
+      padding: 5px 15px;
+      color: white;
+      background-color: #0066cc;
+      box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+      border: none;
+    }
+
+    .square, .circle {
+      width: 30px;
+      height: 30px;
+      position: absolute;
+      background-color: yellow;
+    }
+
+    .circle {
+      border-radius: 50%;
+    }
+
+    .star {
+      background: url("star.png");
+      background-size: 30px 30px;
+      width: 30px;
+      height: 30px;
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+<main>
+  <div id="canvas">
+  </div>
+  <a id="start" href="#">Start</a>
+  <span> | </span>
+  <a id="stop" href="#">Stop</a>
+
+  <h2>Add a shape</h2>
+  <h4>Type</h4>
+
+  <form method="get">
+    <fieldset>
+      <label for="square">
+        <input id="square" type="radio" name="options">Square
+      </label>
+      <label for="circle">
+        <input id="circle" type="radio" name="options">Circle
+      </label>
+      <label for="star">
+        <input id="star" type="radio" name="options">Star
+      </label>
+    </fieldset>
+    <fieldset>
+      <label>Starting Point</label>
+      <input type="number" name="start_x" placeholder="x:">
+      <input type="number" name="start_y" placeholder="y:">
+    </fieldset>
+    <fieldset>
+      <label>Ending Point</label>
+      <input type="number" name="end_x" placeholder="x:">
+      <input type="number" name="end_y" placeholder="y:">
+    </fieldset>
+    <button type="submit" value="Add" name="add">Add</button>
+  </form>
+</main>
+
+<script type="text/javascript">
+  $(function() {
+    var $canvas = $("#canvas"),
+        $shapes = $([]),
+        count = 0;
+
+    $("form").on("submit", function(e) {
+      e.preventDefault();
+      count++;
+
+      var shape = new shapeObj($(this), count);
+
+      if (shape.type) {
+        $canvas.append("<div id=" + shape.id + " class=" + shape.type + "></div>");
+        $canvas.find(":last-child").css({"left": shape.start_x, "top": shape.start_y});
+
+        $shapes.push(shape);
+      } else {alert("select shape")}
+    });
+
+    $("a#start").on("click", function(e) {
+      e.preventDefault();
+
+      $shapes.each(function() {
+        $("#" + this.id).stop().animate({"left": this.end_x, "top": this.end_y}, 2500);
+      });
+
+    });
+
+    $("a#stop").on("click", function(e) {
+      e.preventDefault();
+
+      $shapes.each(function() {
+        $("#" + this.id).stop();
+      })
+    })
+      
+      function shapeObj($form, id) {
+        this.type = $form.find("[name=options]:checked").attr("id");
+        this.start_x = $form.find("[name=start_x]").val() + "px";
+        this.start_y = $form.find("[name=start_y]").val() + "px";
+        this.end_x = $form.find("[name=end_x]").val() + "px";
+        this.end_y = $form.find("[name=end_y]").val() + "px";
+        this.id = this.type + id;
+      };
+  })
+</script>
+</body>
+</html>

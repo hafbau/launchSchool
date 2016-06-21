@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <script type="text/javascript">
+    // Assignment Word Analytics
+    var text = "In the midway of this our mortal life, \
+                I found me in a gloomy wood, astray \
+                Gone from the path direct: and e'en to tell \
+                It were no easy task, how savage wild \
+                That forest, how robust and rough its growth, \
+                Which to remember only, my dismay \
+                Renews, in bitterness not far from death. \
+                Yet to discourse of what there good befell, \
+                All else will I relate discover'd there. \
+                How first I enter'd it I scarce can say, \
+                Such sleepy dullness in that instant weigh'd \
+                My senses down, when the true path I left, \
+                But when a mountain's foot I reach'd, where clos'd \
+                The valley, that had pierc'd my heart with dread, \
+                I look'd aloft, and saw his shoulders broad \
+                Already vested with that planet's beam, \
+                Who leads all wanderers safe through every way.";
+
+    var words_arry = text.replace(/[^\w\s\']+/g, "").split(" "),
+        word_count = {};
+
+    words_arry = words_arry.filter(function(item) { return item !== "" });
+
+    var getKey = function(word) {
+      if (word_count[word.charAt(0).toUpperCase() + word.substr(1)]) {
+        return word.charAt(0).toUpperCase() + word.substr(1);
+      
+      } else if (word_count[word.toLowerCase()]) {
+        return word.toLowerCase();
+      
+      } else {
+        return word;
+      };
+    };
+
+
+    words_arry.forEach(function(word) {
+      var key = getKey(word);
+
+      if (word_count[key]) {
+        word_count[key] += 1;
+
+      } else {
+        word_count[key] = 1;
+      }
+    });
+
+    word_count.total_count = words_arry.length;
+    word_count.unique_count = Object.keys(word_count).length - 2;
+
+    console.log(words_arry);
+    console.log(word_count);
+    
+  </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <script
+        src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+        crossorigin="anonymous"></script>
+
+  <script type="text/javascript">
+    $(function() {
+      
+      $("form").submit(function(e) {
+      e.preventDefault();
+
+      var key = $(this).find("input:text").val();
+      var key_code = key.charCodeAt(0);
+      console.log(key_code);
+      console.log(key);
+
+      $(document).off("keypress");
+
+    $(document).on("keypress", function(e){
+      if (e.which === key_code) {
+        $("a").trigger("click");
+      };
+      
+    });
+
+    });
+
+    $("a").on("click", function(e) {
+      e.preventDefault();
+      $("#accordion").slideToggle();
+    });
+
+  });
+
+  </script>
+</head>
+<body>
+  <form>
+    <fieldset>
+      <input type="text" maxlength="1" name="">
+      <input type="submit" name="enter" value="enter">
+    </fieldset>
+  </form>
+  <a href="#">Toggle D accordion</a>
+  <div id="accordion">
+    <p>Lorem In this assignment, we're going to become more familiar with jQuery events by using a form that will allow you to input a key that will be used to toggle an accordion. When the form is submitted, you'll unbind the current key press event and bind a new event that listens for the new key that is entered into the form. There will also be an anchor that will trigger the key press when it is clicked on.</p>
+  </div>
+
+</body>
+</html>
