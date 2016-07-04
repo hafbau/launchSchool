@@ -10,8 +10,6 @@ class PerfectNumber < StandardError
     end
   end
 
-private
-
   def self.allicot_sum(integer)
     @prime = 2
     @primes = []
