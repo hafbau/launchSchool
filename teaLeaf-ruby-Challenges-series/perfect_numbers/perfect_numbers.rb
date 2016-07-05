@@ -72,7 +72,5 @@ private
 
 end
 
-# puts Benchmark.realtime { PerfectNumber.allicot_sum(999_999_999_999_999_999)}
-# puts Benchmark.realtime { PerfectNumber.allicot_sum1(999_999_999_999_999_999)}
-
-p PerfectNumber.classify(999_999_999_999_999_999)
+p Benchmark.measure { PerfectNumber.classify(999_999_999_999_999_999)}
+#<Benchmark::Tms:0x2e3a8b0 @label="", @real=0.015627, @cstime=0.0, @cutime=0.0, @stime=0.0, @utime=0.015, @total=0.015>
