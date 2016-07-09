@@ -2,7 +2,7 @@ require 'benchmark'
 class PerfectNumber < StandardError
   def self.classify(integer)
     raise RuntimeError, 'Argument should be positive integer' if integer < 0
-    allicot_sum = self.allicot_sum(integer)
+    allicot_sum = allicot_sum(integer)
     if integer == allicot_sum
       'perfect'
     else
@@ -10,13 +10,11 @@ class PerfectNumber < StandardError
     end
   end
 
-private
-
   def self.allicot_sum(integer)
     @prime = 2
     @primes = []
-    self.find_prime_factors(integer)
-    self.all_factors_from_primes.reduce(:+)
+    find_prime_factors(integer)
+    all_factors_from_primes.reduce(:+)
   end
 
   def self.find_prime_factors(integer)
@@ -26,7 +24,7 @@ private
     loop do
       integer = self.decomposed(integer)
       break if self.break?(integer)
-      self.next_prime
+      next_prime
     end
   end
 
