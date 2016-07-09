@@ -1,3 +1,5 @@
+require 'pry'
+
 class Bst
   attr_accessor :data, :right, :left
   
@@ -23,34 +25,23 @@ class Bst
     end
   end
 
-  def each
-    if block_given?
-      traverse.each { |item| yield item }
-    else
-      traverse.each
-    end
-  end
+  def each(&block)
+    return to_enum(:each) unless block_given?
 
-  def traverse
-    all_data = []
-    all_data += left.traverse if left
-    all_data << self.data
-    all_data += right.traverse if right
-        
-    all_data
+    left.each(&block) if @left
+    yield(@data)
+    right.each(&block) if @right
   end
-      
 
 end
+test = Bst.new(4)
+test.insert(3)
+test.insert(5)
+test.insert(1)
+test.insert(6)
+test.insert(4)
 
-# test = Bst.new(4)
-# test.insert(3)
-# test.insert(5)
-# test.insert(1)
-# test.insert(6)
-# test.insert(4)
-
-# # p test.each
+test.each {|a| puts a}
 # p test.traverse
 
 # p test.data, test.right.data, test.left.data, test.right.right.data, test.left.left.data, test.left.right.data
