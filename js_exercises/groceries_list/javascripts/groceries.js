@@ -13,7 +13,6 @@ $(function() {
 
     addItem(name, quantity);
 
-    $f.get(0).reset();0z
+    $f.get(0).reset();
   });
 });
-/0/y

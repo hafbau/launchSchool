@@ -3,6 +3,63 @@
 <head>
   <title>Guess a word</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+  <script type="text/javascript">
+    $(function() {
+      var $message = $("#message"),
+          $letters = $("#spaces"),
+          $guesses = $("#guesses"),
+          $apples = $("#apples");
+
+      var randomWord = (function() {
+        var words = ["quotient", "octothorpe", "proselytize", "stipend"];
+        
+        return function() {
+          var limit = words.length,
+              idx = Math.floor( Math.random() * limit );
+
+          return words.splice(idx, 1)[0];
+        };
+      }());
+
+      function Game() {
+        this.word = randomWord();
+        this.incorrect = 0;
+        this.letters_guesses = [];
+        this.correct_spaces = 0;
+        if(!this.word) {
+          this.displayMessage("Sorry, I've run out of words!");
+        }
+
+        this.word_arr = this.word.split("");
+        this.init();
+      }
+
+      Game.prototype = {
+        createBlanks: function() {
+          var spaces = (new Array(this.word_arr.length + 1)).join("<span></span>");
+            $letters.find("span").remove();
+            $letters.append(spaces);
+            this.$spaces = $("#spaces span");
+        },
+
+        displayMessage: function(text) {
+          $message.text(text);
+        },
+
+        init: function() {
+          this.createBlanks();
+        }
+      }
+      new Game();
+      // console.log(new Game().word);
+      // console.log(new Game().word);
+      // console.log(new Game().word);
+      // console.log(new Game().word);
+      // console.log(new Game().word);
+    })
+  </script>
+
   <style type="text/css">
     body {
       background-color: #f0f0f0;
@@ -71,13 +128,13 @@
     #guesses, #spaces, p {
       padding: 0 0 40px 0;
     }
-
+/*
     p {
       padding-bottom: 25px;
       font-size: 20px;
     }
 
-    p:empty {display: none;}
+    p:empty {display: none;}*/
 
     span {
       display: inline-block;
@@ -118,6 +175,10 @@
       <span></span>
       <span></span>
     </div>
+
+    <p style="text-align:center; margin-right: 70px"><span style=" font: 400 80px/1.5 'Pacifico', Helvetica, sans-serif;
+                color: #007CB7;
+                  text-shadow: 3px 3px 3px rgba(0,0,0,0.2), 7px 7px 3px rgba(0,0,0,0.1);;">Abdulhafiz</span></p>
   </main>
 
 </body>

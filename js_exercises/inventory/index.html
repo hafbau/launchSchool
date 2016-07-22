@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Inventory Assignment</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script type="text/javascript">
+    var inventory = {
+      count: 0,
+      items: []
+    };
+    inventory.init = function () {
+      updateOrderDate();
+      inventory.template = cacheTemplate();
+    }
+
+    function updateOrderDate() {
+      var now = (new Date()).toUTCString();
+      $("#now-str").text(now);
+    }
+
+    function cacheTemplate() {
+      var $temp = $("#item-creator").html();
+      $("#item-creator").remove();
+      return $temp;
+    }
+    function addNewItem() {
+      inventory.count++;
+      var this_item = {
+        id: inventory.count,
+        name: "",
+        stock_number: "",
+        quantity: 1
+      }
+
+      inventory.items.push(this_item);
+      return this_item;
+    }
+    function renderTemplate (item) {
+      temp = inventory.template.replace(/id='ID'/g, "id='" + item.id + "'");
+      $("table").append(temp);
+    };
+
+    $(function() {
+      inventory.init();
+      
+      $("input[name=add-item]").on("click", function(e) {
+        e.preventDefault();
+        renderTemplate(addNewItem());
+      });
+
+      $("table").on("click", "a", function(e) {
+        e.preventDefault();
+        var tr_id = "#" + $(e.target).attr("data-id");
+        $(tr_id).remove();
+      });
+      
+    });
+  </script>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+      border: none;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: grey;
+    }
+    main {
+      width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: white
+    }
+    h1, h2 {
+      margin-bottom: 15px;
+    }
+    dt {
+      font-weight: bold;
+    }
+    form {
+      margin: 10px 0;
+    }
+    fieldset {
+      width: 100%;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+    input {
+      font-size: 15px;
+      font-weight: normal;
+      padding: 0 5px;
+    }
+    input[type="text"], .items input {
+      display: block;
+      height: 35px;
+      width: 100%;
+      margin-top: 5px;
+      border: 2px solid rgba(0, 0, 0, 0.25);
+      border-radius: 5px;
+    }
+    .items td input {
+      display: inline-block;
+      width: auto;
+      margin-right: 5px;
+    }
+    .inline-input label {
+      display: inline-block;
+      margin-right: 10px;
+    }
+    button, input[type="submit"] {
+      height: 35px;
+      width: auto;
+      margin: 10px 0;
+      padding: 0 10px;
+      font-size: 14px;
+      color: white;
+      background-color: #4444ee;
+      box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.75)
+    }
+    input[type="submit"] {
+      background-color: #44ee44;
+    }
+    input:not([type="submit"]):focus {
+      outline: none;
+      border-color: #aabbff;
+      box-shadow: 0 0 1px blue;
+    }
+
+  </style>
+
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Inventory Order Form</h1>
+      <dl>
+        <dt>Date Ordered</dt>
+        <dd id="now-str">Sun, 17 July 2016</dd>
+      </dl>
+    </header>
+    <section>
+      <form>
+        <fieldset>
+          <label for='requester'>Requester Name</label>
+          <input type="text" name="requester">
+        </fieldset>
+        <fieldset>
+          <h2>Shipping Address</h2>
+          <label for='street'>Street Address</label>
+          <input type="text" name="street">
+          <input type="text" name="street">
+          <fieldset class='inline-input'>
+            <label for='city'>City
+              <input type="text" name="city">
+            </label>
+            <label for='state'>State
+              <input type="text" name="state">
+            </label>
+            <label for='zip'>Zipcode
+              <input type="text" name="zip">
+            </label>
+          </fieldset>
+        </fieldset>
+        <fieldset>
+          <h2>Items to order</h2>
+          <table>
+          <script type="text/template" id="item-creator">
+            <tr id='ID' class="items">
+              <td>
+                <label for='item-name'>Name
+                  <input type="text" name="item-name" size="25">
+                </label>
+              </td>
+              <td>
+                <label for='stock-number'>Stock Number
+                  <input type="number" name="stock-number" style="width:120px;">
+                </label>
+              </td>
+              <td>
+                <label for='quantity'>Quantity
+                  <input type="number" name="quantity" style="width:80px;" value="1">
+                </label>
+              </td>
+              <td>
+                <a data-id='ID' href="#">Delete</a>
+              </td>
+            </tr>
+          </script>
+          </table>
+          <input type="submit" name="add-item" value="ADD ITEM">
+        </fieldset>
+        <button>ORDER INVENTORY</button>
+      </form>
+    </section>
+  </main>
+
+</body>
+</html>
