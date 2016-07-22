@@ -5,8 +5,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <script type="text/javascript">
     var inventory = {
-      count: 0,
-      items: []
+      count: 0
     };
     inventory.init = function () {
       updateOrderDate();
@@ -19,41 +18,26 @@
     }
 
     function cacheTemplate() {
-      var $temp = $("#item-creator").html();
-      $("#item-creator").remove();
-      return $temp;
+      return $("#item-creator").remove().html();
     }
-    function addNewItem() {
-      inventory.count++;
-      var this_item = {
-        id: inventory.count,
-        name: "",
-        stock_number: "",
-        quantity: 1
-      }
 
-      inventory.items.push(this_item);
-      return this_item;
-    }
-    function renderTemplate (item) {
-      temp = inventory.template.replace(/id='ID'/g, "id='" + item.id + "'");
+    function addNewItem (e) {
+      e.preventDefault();
+      inventory.count++;
+      temp = inventory.template.replace(/id='ID'/g, "id='" + inventory.count + "'");
       $("table").append(temp);
     };
 
-    $(function() {
-      inventory.init();
-      
-      $("input[name=add-item]").on("click", function(e) {
-        e.preventDefault();
-        renderTemplate(addNewItem());
-      });
-
-      $("table").on("click", "a", function(e) {
+    function deleteItem (e) {
         e.preventDefault();
         var tr_id = "#" + $(e.target).attr("data-id");
         $(tr_id).remove();
-      });
-      
+      }
+
+    $(function() {
+      inventory.init();      
+      $("input[name=add-item]").on("click", addNewItem);
+      $("table").on("click", "a", deleteItem);      
     });
   </script>
   <style type="text/css">
