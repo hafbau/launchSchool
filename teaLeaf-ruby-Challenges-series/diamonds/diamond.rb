@@ -1,31 +1,24 @@
-
 module Diamond
-  SPACE = " "
-  LETTERS = ("A".."Z").to_a.map.with_index.to_h.freeze
-
+  TOP = "A"
   def self.make_diamond(letter)
-    letter = letter.upcase
-    index = LETTERS[letter]
-    init_width_str = SPACE * (2 * index + 1)
-    string = ""
+    letter = letter.upcase and index = (TOP...letter).to_a.size
+    init_width_str = " " * (2 * index + 1)
+    
+    top_half = self.make_top_half(init_width_str, TOP, index)
+    top_half + self.fold(top_half, letter)
+  end
 
-    "A".upto(letter, true) do |char|
-      string += self.make_row(init_width_str, char, index) + "\n"
-      index -= 1
+  def self.make_top_half(init_str, letter, idx)
+    unless idx < 0
+      row_str = init_str.dup
+      row_str[idx] = letter and row_str[row_str.size - idx - 1] = letter
+      row_str += "\n" + self.make_top_half(init_str, letter.succ, idx - 1)
     end
-
-    base = self.make_row(init_width_str, letter, 0)
-    string + base + string.reverse + "\n"
+    row_str ||= ""
   end
 
-  def self.make_row(init_str, letter, idx)
-    init_str = init_str.dup
-    init_str[idx] = letter and init_str[init_str.size - idx - 1] = letter
-    init_str
+  def self.fold(half, base)
+    (half.sub(/(\n#{base}\s+#{base}\n)/, "").reverse + "\n" unless base == TOP) || ""
   end
 
-end
-
-module Bookkeeping
-  VERSION = 1
 end

@@ -34,7 +34,7 @@ class DiamondTest < Minitest::Test
   end
 
   def test_bookkeeping
-    # skip
+    skip
     assert_equal 1, Bookkeeping::VERSION
   end
 end
