@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Html Api</title>
+  <link rel="stylesheet" type="text/css" href="">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <!-- <script src="javascripts/handlebars-v4.0.5.js"></script> -->
+  <!-- <script src="javascripts/html_api.js"></script> -->
+
+</head>
+<body>
+
+  <canvas width="400" height="400"></canvas>
+  <img src="https://www.google.com/images/srpr/logo11w.png">
+
+<script type="text/javascript">
+  var canvas = document.querySelector("canvas"),
+      ctx = canvas.getContext("2d")
+      colors = ["#000", "#003", "#006", "#009", "#00c", "#00f"];
+
+  function draw() {
+    colors.forEach(function(color, i) {
+      var offset = i * 20;
+      ctx.fillStyle = color;
+      ctx.fillRect(offset, offset, canvas.width - 2 * offset, canvas.height - 2 * offset);
+    });
+
+    colors.unshift(colors.pop());
+    setTimeout(draw, 200); // animate the rectangles
+  };
+
+  function drawCircle() {
+    var x = canvas.width / 2,
+      y = canvas.height / 2,
+      radius = x;
+
+    ctx.beginPath();
+    ctx.arc(x, y, radius, 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.closePath();
+  }
+
+  function drawTriangleOutline() {
+    var x = canvas.width / 2,
+      y = canvas.height / 2;
+
+    ctx.beginPath();
+    ctx.strokeStyle = "rgba(0, 102, 204, .7)";
+    ctx.moveTo(x, y - 50);
+    ctx.lineTo(x + 50, y);
+    ctx.lineTo(x - 50, y);
+    ctx.lineTo(x, y - 50);
+    ctx.stroke();
+    ctx.closePath();
+  }
+
+  function canvasToImage() {
+    var img_src = canvas.toDataURL("png"),
+    img = document.createElement("img");
+    img.src = img_src;
+    document.body.appendChild(img);
+  }
+
+  var img = document.querySelector("img");
+  canvas.width = img.width;
+  canvas.height = img.height;
+
+  ctx.drawImage(img, 0, 0);
+  // draw();
+  // drawCircle();
+  // drawTriangleOutline();
+  // canvasToImage();
+
+
+</script>
+</body>
+</html>

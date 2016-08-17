@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Media Gallery</title>
+  <link rel="stylesheet" type="text/css" href="stylesheets/gallery.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script src="javascripts/handlebars-v4.0.5.js"></script>
+  <script src="javascripts/gallery.js"></script>
+</head>
+<body>
+  <div class="gallery-layover"></div>
+  <main class="gallery">
+    <header><h1>Amanda Rose's Photos</h1></header>
+   
+    <section id="slideshow">
+    
+    </section>
+
+
+
+    <section class="new-comment">
+      <form method="post">
+        <h1>Your Comment</h1>
+        <input type="text" name="name" placeholder="your username">
+        <input type="email" name="email" placeholder="your email here">
+        <input type="text" name="body" placeholder="comment here...">
+        <input type="submit" name="post-comment" value="Post Comment">
+      </form>
+    </section>
+  </main>
+    <script id="photo-template" type="text/x-handlebar-template">      
+      <div id="slide">
+        <figure>
+          <img src="{{src}}">
+          <figcaption>{{caption}}</figcaption>
+          <ul>
+            <li class="prev"><a href="#">Prev</a></li>
+            <li class="next"><a href="#">Next</a></li>
+          </ul>
+        </figure>
+   
+        <div>
+          <h2 class="post-title">{{title}}</h2>
+          {{>actions_template}}
+          <p><time>Taken on {{created_at}}</time></p>
+        </div>
+
+      </div> <!-- #slide end -->
+    </script>
+
+      <script id="actions-template" type="text/x-handlebars-template">
+        <div class="post-actioned">
+          <a id="like" href="#">{{likes}} Likes</a>
+          <a id="favorite" href="#">{{favorites}} Favorites</a>
+        </div>
+      </script>
+
+
+      <script id="comments-template" type="text/x-handlebars-template">
+        <section id="view-comments">
+          <header><h3>Comments</h3></header>
+          {{#each comments}}
+            {{>comment_template}}
+          {{/each}}
+        </section>
+      </script>
+
+      <script id="comment-template" type="text/x-handlebars-template">
+        <article class="comment">
+          <div class="comment-details">
+            <img src="{{gravatar}}" class="avatar-post">
+            <div>
+              <div class="posted-by">{{name}}</div>
+              <span>{{date}}</span><span> &bull; </span>
+              <span>Friends</span><span> &bull; </span>
+              <span>Doha</span>
+            </div>
+            <p class="comment-body">{{body}}</p>
+          </div>
+        </article>
+      </script>
+</body>
+</html>

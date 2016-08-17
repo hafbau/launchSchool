@@ -13,8 +13,8 @@ class Bst
   def each(&block)
     return to_enum(:each) unless block_given?
 
-    left.each(&block) if @left
+    left.each(&block) if left
     yield(data)
-    right.each(&block) if @right
+    right.each(&block) if right
   end
 end

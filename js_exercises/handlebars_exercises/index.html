@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>handlebars</title>  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script src="handlebars-v4.0.5.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      var posts = [{
+        title: "Another title",
+        published_date: "22 July 2015",
+        body: "this body should have no strenght at all..."
+      }],
+          post = {
+                   title: "This blog title",
+                   published_date: "20 Jun 2016",
+                   body: "Some example lorem ipsum text for the body here" 
+                  },
+          $blog_info = $("#blog-template").html();
+      var blog_template = Handlebars.compile($blog_info);
+
+      Handlebars.registerPartial("tag", $("#tag").html());
+      
+      post.body = "<strong>" + post.body + "</strong>";
+      post.tags = ['dung', 'crap', 'special'];
+
+      posts.push(post);
+
+      $("body").append(blog_template({posts: posts}));
+    });
+  </script>
+</head>
+<body>
+  <script id="tag" type="text/x-handlebars-template">
+    <span><small>{{[]}}</small></span>
+  </script>
+  <script id="blog-template" type="text/x-handlebars-template">
+    {{#each posts}}
+      <article>
+        <h1>{{title}}</h1>
+        <time>{{published_date}}</time>
+        <p>{{{body}}}</p>
+        {{#if tags}}
+          {{#each tags}}
+            {{>tag}}
+          {{/each}}
+        {{/if}}
+      </article>
+    {{/each}}
+  </script>
+
+</body>
+</html>

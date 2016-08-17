@@ -5,7 +5,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <script type="text/javascript">
     var inventory = {
-      count: 0
+      count: 0,
+      items: []
     };
     inventory.init = function () {
       updateOrderDate();
@@ -24,20 +25,45 @@
     function addNewItem (e) {
       e.preventDefault();
       inventory.count++;
-      temp = inventory.template.replace(/id='ID'/g, "id='" + inventory.count + "'");
+      var item = {
+        id: inventory.count,
+        name: "",
+        stock_number: "",
+        quantity: 1
+      };
+      inventory.items.push(item);
+
+      temp = inventory.template.replace(/ID/g, item.id);
       $("table").append(temp);
     };
 
+    function updateItem(e) {
+      e.preventDefault();
+      var $parent = $(e.target).closest("tr"),
+          idx = +$parent.attr("id");
+
+      inventory.items.forEach(function(item) {
+        if (item.id === idx) {
+          item.name = $parent.find("input[name=item-name]").val();
+          item.stock_number = $parent.find("input[name=stock-number]").val();
+          item.quantity = +$parent.find("input[name=quantity]").val();
+
+          return false;
+        }
+      });
+    }
+
     function deleteItem (e) {
         e.preventDefault();
-        var tr_id = "#" + $(e.target).attr("data-id");
-        $(tr_id).remove();
+        var idx = +$(e.target).closest("tr").remove().attr("id");
+        inventory.items = inventory.items.filter(function(item) { return item.id !== idx });
       }
 
     $(function() {
       inventory.init();      
       $("input[name=add-item]").on("click", addNewItem);
-      $("table").on("click", "a", deleteItem);      
+      $("table").on("click", "a", deleteItem);  
+      $("table").on("blur", ":input", updateItem);    
     });
   </script>
   <style type="text/css">

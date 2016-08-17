@@ -1,0 +1,142 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+  position: relative;
+  color: #212121;
+  box-sizing: border-box;
+  vertical-align: middle;
+  /*z-index: 2;*/
+}
+body {
+  min-height: 100%;
+  height: 100%;
+}
+body {
+  height: auto;
+}
+.gallery-layover {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 100;
+}
+.gallery {
+  width: 70%;
+  min-width: 850px;
+  margin: 0 auto;
+  padding: 25px;
+  background-color: white;
+  z-index: 200;
+}
+header {
+  margin: 20px 0;
+}
+figure img {
+  width: 100%;
+}
+figcaption {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  min-height: 50px;
+  padding: 5px 10px;
+  text-align: center;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+ul {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  margin-top: -40px; /*half of icon height + half of actions height */
+  list-style: none;
+  z-index: 300;
+}
+.prev a, .next a {
+  display: block;
+  width: 40px;
+  height: 80px;
+  margin: 10px;
+  text-indent: -10000px;
+  background: transparent url("../images/icon_pager.png") no-repeat;
+  background-size: cover;
+  float: left;
+}
+.next a {
+  float: right;
+  background-position: center right;
+}
+.post-title {
+  clear: both;
+  display: inline-block;
+  margin: 35px 0 5px 0;
+}
+.post-actioned {
+  float: right;
+  margin-top: 45px;
+}
+.post-actioned a, input[type=submit] {
+  margin-left: 5px;
+  padding: 10px 20px;
+  color: white;
+  font-size: 18px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+  background-color: #0066cc;
+}
+.post-actioned a ~ a {
+  background-color: #00cc66;
+}
+time, .posted-by ~ span {
+  color: #727272;
+  font-size: 14px;
+}
+#view-comments {
+  padding: 45px 0;
+}
+.avatar-post {
+  width: 80px;
+  border-radius: 50%;
+}
+.comment-details {
+  margin: 35px 0 20px;
+}
+.comment-details > div {
+  display: inline-block;
+  padding: 10px 25px;
+}
+.posted-by {
+  font-weight: bold;
+  font-size: 20px;
+}
+.comment {
+  border-bottom: 1px solid #727272;
+}
+input[type=text], input[type=email] {
+  height: 41px;
+  padding: 0 10px;
+  margin-right: -9px;
+  font-size: 18px;
+  border-radius: 5px;
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3);
+
+}
+.new-comment input[type=text] {
+  width: 500px;
+}
+.new-comment h1 {
+  margin: 25px 0 15px;
+}
+#slideshow {
+  display: none;
+  /*transition: all 5s;*/
+}
+.comment-body {
+  margin: 0 108px 35px;
+  line-height: 1.3;
+}

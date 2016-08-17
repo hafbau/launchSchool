@@ -19,4 +19,4 @@ class Prime
   end
 end
 
-# p Prime.nth(1000008800)
+p Prime.nth(1008800)
